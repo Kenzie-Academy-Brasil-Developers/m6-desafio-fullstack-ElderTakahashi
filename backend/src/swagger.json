@@ -1,0 +1,848 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API de Gerenciamento de Contatos",
+    "description": "Uma API simples para gerenciar informações de contatos. Com esta API, você pode criar, atualizar, listar e excluir registros de contatos.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Development env"
+    },
+    {
+      "url": "endereço do deploy",
+      "description": "Production env"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "description": "Rota para buscar todos os usuários cadastrados. Acesso restrito a administradores.",
+        "tags": ["Rotas CRUD de usuários"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/readAllUser"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": "588ca00a-2640-4efc-8c6e-a80a6b7de032",
+                        "name": "user1",
+                        "email": "user1@mail.com",
+                        "phone": "999822003",
+                        "picture": null,
+                        "admin": false,
+                        "createdAt": "2024-02-13",
+                        "contacts": []
+                      },
+                      {
+                        "id": "e6a1018b-1b00-4c60-b148-1ebe73a72018",
+                        "name": "user2",
+                        "email": "user2@mail.com",
+                        "phone": "999822003",
+                        "picture": null,
+                        "admin": false,
+                        "createdAt": "2024-02-13",
+                        "contacts": []
+                      },
+                      {
+                        "id": "aedee25c-0f9e-47bf-a6f9-ae8ec984e4cb",
+                        "name": "user3",
+                        "email": "user3@mail.com",
+                        "phone": "999822003",
+                        "picture": null,
+                        "admin": false,
+                        "createdAt": "2024-02-13",
+                        "contacts": []
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      },
+      "post": {
+        "description": "Rota responsável pela criação de usuários",
+        "tags": ["Rotas CRUD de usuários"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/returnUser"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "id": "d4f3cf2a-3ba6-433f-a2c4-c5c20db88a80",
+                      "name": "user name",
+                      "email": "userName@mail.com",
+                      "phone": "99999999",
+                      "picture": null,
+                      "admin": false,
+                      "createdAt": "2024-02-13"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "conflictError": {
+                    "value": {
+                      "message": "Email already exists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "required body": {
+                    "value": {
+                      "message": {
+                        "name": ["Required"],
+                        "email": ["Required"],
+                        "phone": ["Required"],
+                        "password": ["Required"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      }
+    },
+    "/users/admin": {
+      "post": {
+        "description": "Rota responsável pela criação de admin",
+        "tags": ["Rotas CRUD de usuários"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createAdmin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/returnUser"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "id": "d4f3cf2a-3ba6-433f-a2c4-c5c20db88a80",
+                      "name": "adminName",
+                      "email": "adminName@mail.com",
+                      "phone": "99999999",
+                      "picture": null,
+                      "admin": true,
+                      "createdAt": "2024-02-13"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "conflictError": {
+                    "value": {
+                      "message": "Email already exists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "required body": {
+                    "value": {
+                      "message": {
+                        "name": ["Required"],
+                        "email": ["Required"],
+                        "phone": ["Required"],
+                        "password": ["Required"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      }
+    },
+    "/users/<userId>": {
+      "get": {
+        "description": "Rota responsável por buscar o usuário informado",
+        "tags": ["Rotas CRUD de usuários"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "Id do usuário que deseja buscar",
+            "name": "userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": "e6a1018b-1b00-4c60-b148-1ebe73a72018",
+                      "name": "user2",
+                      "email": "user2@mail.com",
+                      "phone": "999822003",
+                      "picture": null,
+                      "admin": false,
+                      "createdAt": "2024-02-13",
+                      "contacts": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/UserNotFound"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      },
+      "patch": {
+        "description": "Rota responsável por atualizar os dados do usuário informado",
+        "tags": ["Rotas CRUD de usuários"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "Id do usuário que deseja buscar",
+            "name": "userId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/returnUser"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "id": "d4f3cf2a-3ba6-433f-a2c4-c5c20db88a80",
+                      "name": "user name",
+                      "email": "userName@mail.com",
+                      "phone": "99999999",
+                      "picture": null,
+                      "admin": false,
+                      "createdAt": "2024-02-13"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/UserNotFound"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      },
+      "delete": {
+        "description": "Rota responsável por deletar os dados do usuário informado",
+        "tags": ["Rotas CRUD de usuários"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "Id do usuário que deseja buscar",
+            "name": "userId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Body content"
+          },
+          "404": {
+            "$ref": "#/components/responses/UserNotFound"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "Rota responsável pelo login dos usuários",
+        "tags": ["Rota de login"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/userLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "token": {
+                    "value": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWxkZXIiLCJ1c2VySWQiOiI3N2YyN2JhYi1jM2ZkLTQ2NTgtYWE0ZC05NGNlNzdiYTYyMGEiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNzA3ODUxOTMzLCJleHAiOjE3MDc5MzgzMzMsInN1YiI6Ijc3ZjI3YmFiLWMzZmQtNDY1OC1hYTRkLTk0Y2U3N2JhNjIwYSJ9.Ngfej8f7zwV6I7iA8UHteExJnUv45DyHxqDq_cbUD_A"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+
+        "security": [{}]
+      }
+    },
+    "/contacts": {
+      "post": {
+        "description": "Rota responsável pela criação de contatos",
+        "tags": ["Rotas CRUD de contatos"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createContact"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "contact": {
+                    "value": {
+                      "message": "Contact created"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "required body": {
+                    "value": {
+                      "message": {
+                        "name": ["Required"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/<userId>": {
+      "get": {
+        "description": "Rota responsável por buscar os contatos do usuário informado",
+        "tags": ["Rotas CRUD de contatos"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "Id do usuário que deseja buscar",
+            "name": "userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/readAllContacts"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": "8acb1fd4-2b19-4094-a88f-373206c80b14",
+                        "name": "contactName",
+                        "email": null,
+                        "phone": null,
+                        "picture": null,
+                        "createdAt": "2024-02-13"
+                      },
+                      {
+                        "id": "57345f86-57fd-40b3-b54a-fb1d82aaa4bc",
+                        "name": "contactName2",
+                        "email": "contactMail2@mail.com",
+                        "phone": null,
+                        "picture": null,
+                        "createdAt": "2024-02-13"
+                      },
+                      {
+                        "id": "e7e10163-22bf-4217-9ea4-63f1d82ef286",
+                        "name": "contactName3",
+                        "email": "contactMail3@mail.com",
+                        "phone": "999999999",
+                        "picture": null,
+                        "createdAt": "2024-02-13"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/UserNotFound"
+          }
+        }
+      }
+    },
+    "/contacts/<contactId>": {
+      "patch": {
+        "description": "Rota responsável por atualizar os dados do contato informado",
+        "tags": ["Rotas CRUD de contatos"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "Id do contato que deseja buscar",
+            "name": "contactId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createContact"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/returnContact"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "id": "d4f3cf2a-3ba6-433f-a2c4-c5c20db88a80",
+                      "name": "user name",
+                      "email": "userName@mail.com",
+                      "phone": "99999999",
+                      "picture": null,
+                      "createdAt": "2024-02-13"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/ContactNotFound"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      },
+      "delete": {
+        "description": "Rota responsável por deletar o contato informado",
+        "tags": ["Rotas CRUD de contatos"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "Id do contato que deseja deletar",
+            "name": "contactId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Body content"
+          },
+          "404": {
+            "$ref": "#/components/responses/ContactNotFound"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "createUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "returnUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "createAdmin": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          }
+        }
+      },
+      "userLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "readUserById": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "contacts": {
+            "type": "array"
+          }
+        }
+      },
+      "readAllUser": {
+        "type": "array",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "contacts": {
+            "type": "array"
+          }
+        }
+      },
+      "createContact": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          }
+        }
+      },
+      "readAllContacts": {
+        "type": "array",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "returnContact": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "examples": {
+              "error": {
+                "value": {
+                  "message": "Invalid credentials"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "examples": {
+              "error": {
+                "value": {
+                  "message": "Insufficient permission"
+                }
+              }
+            }
+          }
+        }
+      },
+      "UserNotFound": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "examples": {
+              "error": {
+                "value": {
+                  "message": "User not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ContactNotFound": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "examples": {
+              "error": {
+                "value": {
+                  "message": "Contact not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}
