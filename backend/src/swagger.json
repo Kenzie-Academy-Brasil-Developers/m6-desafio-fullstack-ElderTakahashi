@@ -371,7 +371,8 @@
                 "examples": {
                   "token": {
                     "value": {
-                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWxkZXIiLCJ1c2VySWQiOiI3N2YyN2JhYi1jM2ZkLTQ2NTgtYWE0ZC05NGNlNzdiYTYyMGEiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNzA3ODUxOTMzLCJleHAiOjE3MDc5MzgzMzMsInN1YiI6Ijc3ZjI3YmFiLWMzZmQtNDY1OC1hYTRkLTk0Y2U3N2JhNjIwYSJ9.Ngfej8f7zwV6I7iA8UHteExJnUv45DyHxqDq_cbUD_A"
+                      "userId": "37a4f86a-d39a-4bfa-9090-c2c37087680c",
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidG9zaGkyOCIsInVzZXJJZCI6IjM3YTRmODZhLWQzOWEtNGJmYS05MDkwLWMyYzM3MDg3NjgwYyIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzA3OTUwMzQ4LCJleHAiOjE3MDgwMzY3NDgsInN1YiI6IjM3YTRmODZhLWQzOWEtNGJmYS05MDkwLWMyYzM3MDg3NjgwYyJ9.7qZA3JiVN_9tn9_39frSe04wd0RXvsLiABLUW8JA-II"
                     }
                   }
                 }

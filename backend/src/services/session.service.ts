@@ -11,7 +11,7 @@ export const loginService = async (data: UserLogin): Promise<LoginReturn> => {
   const user: User | null = await userRepo.findOneBy({ email });
 
   if (!user) throw new AppError("Invalid credentials", 401);
-
+  const userId = user.id;
   const comparePass = await compare(data.password, user.password);
 
   if (!comparePass) throw new AppError("Invalid credentials", 401);
@@ -22,5 +22,5 @@ export const loginService = async (data: UserLogin): Promise<LoginReturn> => {
     { subject: user.id.toString(), expiresIn: process.env.EXPIRES_IN! }
   );
 
-  return { token };
+  return { userId, token };
 };

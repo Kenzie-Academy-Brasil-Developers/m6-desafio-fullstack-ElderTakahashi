@@ -25,6 +25,6 @@ export type UserReadAllReturn = UserReturn[];
 
 export type UserLogin = z.infer<typeof userLoginSchema>;
 
-export type LoginReturn = { token: string };
+export type LoginReturn = { userId: string; token: string };
 
 export type UserRepo = Repository<User>;
