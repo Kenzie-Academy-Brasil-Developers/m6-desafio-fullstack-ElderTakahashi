@@ -11,7 +11,7 @@
       "description": "Development env"
     },
     {
-      "url": "endereço do deploy",
+      "url": "https://m6-desafio-fullstack-eldertakahashi.onrender.com",
       "description": "Production env"
     }
   ],
