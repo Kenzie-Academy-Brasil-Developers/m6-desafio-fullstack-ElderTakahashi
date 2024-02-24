@@ -1,0 +1,52 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+
+  border: none;
+  border-radius: var(--border-radius-1);
+  cursor: pointer;
+
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-3);
+  font-size: var(--font-size-2);
+  line-height: var(--line-height-3);
+
+  &.signUp {
+    height: 38px;
+    width: 100%;
+    background: var(--background-color-2);
+    color: var(--font-color-1);
+
+    @media (min-width: 550px) {
+      height: 48px;
+    }
+
+    &:hover {
+      background: var(--background-color-1);
+    }
+  }
+
+  &.back {
+    width: 67px;
+    height: 40px;
+    width: 80px;
+    height: 32px;
+    background: var(--background-color-3);
+
+    color: var(--font-color-1);
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-2);
+    line-height: var(--line-height-4);
+
+    &:hover {
+      background: var(--color-grey-4);
+    }
+
+    @media (min-width: 550px) {
+      width: 67px;
+      height: 40px;
+    }
+  }
+}

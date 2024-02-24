@@ -1,0 +1,21 @@
+.inputBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  gap: 12px;
+
+  & > button {
+    position: absolute;
+    top: 2.2rem;
+    right: 10px;
+    background: transparent;
+    font-size: var(--font-size-2);
+    color: var(--font-color-3);
+
+    @media (min-width: 550px) {
+      top: 2.45rem;
+    }
+  }
+}

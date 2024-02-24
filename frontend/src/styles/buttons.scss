@@ -1,0 +1,136 @@
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-3);
+  font-size: var(--font-size-2);
+  line-height: var(--line-height-4);
+
+  &.signIn {
+    height: 38px;
+    width: 100%;
+    background: var(--color-primary);
+    color: #ffffff;
+
+    &.colorNegative {
+      background-color: var(--color-primary-negative);
+    }
+
+    &:hover {
+      background: var(--color-primary-focus);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: var(--color-primary-negative);
+    }
+
+    @media (min-width: 550px) {
+      height: 48px;
+    }
+  }
+
+  &.logout {
+    width: 55px;
+    height: 32px;
+    background: var(--background-color-3);
+
+    color: var(--font-color-1);
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-2);
+    line-height: var(--line-height-4);
+
+    &:hover {
+      background: var(--color-grey-4);
+    }
+  }
+
+  &.transparent {
+    background: transparent;
+    padding: 0;
+  }
+
+  &.logoutModalButton {
+    width: clamp(110px, 30vw, 140px);
+    height: 40px;
+    background: var(--color-primary-negative);
+    color: var(--font-color-2);
+
+    &:hover {
+      background: var(--color-primary);
+    }
+  }
+
+  &.closeModal {
+    background: transparent;
+  }
+
+  &.addContact {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    opacity: 50%;
+    transition: none;
+
+    & > svg {
+      fill: var(--color-grey-5);
+      font-size: var(--font-size-1);
+    }
+
+    &:hover {
+      opacity: 100%;
+    }
+  }
+
+  &.cardButton {
+    width: 19px;
+    height: 19px;
+    background: transparent;
+    padding: 0;
+    transition: 0s;
+    opacity: 50%;
+
+    &:hover {
+      opacity: 100%;
+    }
+  }
+
+  &.submitModal {
+    height: 48px;
+    background: var(--color-primary);
+    color: var(--font-color-2);
+
+    &.disable {
+      background: var(--color-primary-negative);
+    }
+
+    &:hover {
+      background: var(--color-primary-focus);
+    }
+  }
+
+  &.delAccount {
+    height: 48px;
+    width: 100%;
+    background: var(--color-alert-1);
+    color: var(--font-color-2);
+    &:hover {
+      background: var(--color-alert-2);
+    }
+
+    &.options {
+      background: var(--color-grey-2);
+
+      &:hover {
+        background: var(--color-grey-3);
+      }
+    }
+  }
+}

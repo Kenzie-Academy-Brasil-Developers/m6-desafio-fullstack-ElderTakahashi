@@ -1,0 +1,11 @@
+.registerBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 35px 15px;
+  gap: 25px;
+  background: var(--background-color-3);
+  border-radius: var(--border-radius-1);
+}

@@ -1,0 +1,30 @@
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  max-width: 370px;
+  padding: 1rem;
+  margin: 0 auto;
+  gap: 5px;
+
+  &.high {
+    height: 80px;
+  }
+
+  &.wider {
+    max-width: 1000px;
+  }
+
+  &.spaceBetween {
+    height: 70px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &.marginTop {
+    margin-top: 25px;
+  }
+}

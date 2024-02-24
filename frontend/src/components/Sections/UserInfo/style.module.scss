@@ -1,0 +1,46 @@
+.sectionBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  height: 131px;
+  padding: 1rem;
+  margin: 0 auto;
+  gap: 10px;
+
+  & > div:first-child {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+    & > img {
+      height: 60px;
+      width: 60px;
+      border-radius: 100%;
+      object-fit: cover;
+    }
+
+    @media (min-width: 550px) {
+    }
+  }
+
+  & > div:last-child {
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+
+    & > p {
+      height: 20px;
+    }
+  }
+
+  @media (min-width: 550px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 118px;
+  }
+}
