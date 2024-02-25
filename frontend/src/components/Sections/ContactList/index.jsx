@@ -2,13 +2,11 @@ import { ContactCard } from "./ContactCard";
 import styles from "./style.module.scss";
 import { MdAddCircle } from "react-icons/md";
 import { FaRegFilePdf } from "react-icons/fa6";
-
 import { useContext } from "react";
 import { UserContext } from "../../../providers/UserContext";
 import { ContactContext } from "../../../providers/ContactContext";
 import { EditContactModal } from "../../Modal/EditContactModal";
 import { CreateContactModal } from "../../Modal/CreateContactModal";
-
 import { useState } from "react";
 
 export const ContactList = () => {

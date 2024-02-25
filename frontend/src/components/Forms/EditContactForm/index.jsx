@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Input } from "../Input";
-// import { Select } from "../Select";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editContactFormSchema } from "./editContactFormSchema";
@@ -11,7 +11,7 @@ export const EditContactForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(editContactFormSchema),
   });

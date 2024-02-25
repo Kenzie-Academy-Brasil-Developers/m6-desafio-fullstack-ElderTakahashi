@@ -3,7 +3,7 @@ import { MdClose } from "react-icons/md";
 import { UserContext } from "../../../providers/UserContext";
 import { UpdateUserForm } from "../../Forms/UpdateUserForm";
 export const UpdateUserModal = () => {
-  const { user, setUser, setUpdateUserModalVisible } = useContext(UserContext);
+  const { setUpdateUserModalVisible } = useContext(UserContext);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
