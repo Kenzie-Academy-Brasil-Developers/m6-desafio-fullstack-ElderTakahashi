@@ -6,9 +6,7 @@
 
 Uma aplicação simples para gerenciar informações de contatos. Com esta API, você pode criar, atualizar, listar e excluir registros de contatos.
 
-## Testar aplicação
-
-Caso queira testar a aplicação antes de clonar o repositório basta acessar esse [link](https://frontend-b8gh6r750-eldertakahashi.vercel.app/).
+Para testar a aplicação antes de clonar o repositório basta acessar esse [link](https://frontend-b8gh6r750-eldertakahashi.vercel.app/).
 
 Para ver a documentação da api acesse [link](https://m6-desafio-fullstack-eldertakahashi.onrender.com/api-documentation)
 
