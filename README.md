@@ -62,10 +62,7 @@ Agora você já pode acessar a documentação da api em:
 
 3.  A aplicação, por padrão, faz requisições para a PORT:3000, caso tenha alterado a PORT nas configuracoes do backend, altere o arquivo "api.js" localizado na pasta "src/services"
 
-        export const contactListApi = axios.create({
-            baseURL: "http://localhost:3000",
-            timeout: 8 * 1000,
-        });
+        baseURL: "http://localhost:3000",
 
 4.  Rode o projeto:
 
